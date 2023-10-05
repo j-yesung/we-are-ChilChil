@@ -6,7 +6,7 @@ $(document).ready(function() {
        
        if ($(this).hasClass("active")) {
           $(".active").removeClass('active')
-       } else {ß
+       } else {
           $(".active").removeClass('active')
           $("." + $(this).val()).show()  
           $(this).addClass('active')
