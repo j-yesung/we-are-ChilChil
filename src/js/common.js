@@ -1,13 +1,20 @@
 // 로드 시 자기소개 hide -> 버튼 클릭하면 hide/show
 $(document).ready(function () {
-  $('.info-area').children().hide();
-  $('button').click(function () {
+  // 말풍선 숨기기
+  $('.bubble').hide();
+  // 자기 소개 숨기기
+  $('.info-area').children('.user').hide();
+
+  $('.info-btn').click(function () {
     $('.info-area').children().hide();
 
     if ($(this).hasClass('active')) {
       $('.active').removeClass('active');
+      $('.bubble').hide();
+      $('.info-area').children().not('.user').show();
     } else {
       $('.active').removeClass('active');
+      $('.bubble').show();
       $('.' + $(this).val()).show();
       $(this).addClass('active');
     }
