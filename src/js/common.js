@@ -1,8 +1,8 @@
 // 로드 시 자기소개 hide -> 버튼 클릭하면 hide/show
 $(document).ready(function() {
-  $("div").hide();
+  $(".info-area").children().hide();
     $("button").click(function() {
-       $("div").hide();
+       $(".info-area").children().hide();
        
        if ($(this).hasClass("active")) {
           $(".active").removeClass('active')

@@ -10,21 +10,69 @@
   <body>
     <header>칠칠맞조</header>
     <main>
-      <!--자기 소개 페이지-->
-      <div class="yesung">자기소개a</div>
-      <div class="gayeon">자기소개b</div>
-      <div class="jinho">자기소개c</div>
-      <div class="jiye">자기소개d</div>
-      <div class="gunwoo">자기소개e</div>
+        <!--자기 소개 페이지-->
+        <div class="info-area">
+            <div class="yesung">자기소개a</div>
+            <div class="gayeon">자기소개b</div>
+            <div class="jinho">자기소개c</div>
+            <div class="jiye">자기소개d</div>
+            <div class="gunwoo">자기소개e</div>
+        </div>
     </main>
     <aside>
-      <!--팀원 버튼-->
-      <button id="btn_ys" value="yesung">장예성</button>
-      <button id="btn_gy" value="gayeon">박가연</button>
-      <button id="btn_jh" value="jinho">이진호</button>
-      <button id="btn_jy" value="jiye">김지예</button>
-      <button id="btn_gw" value="gunwoo">김건우</button>
+        <!--팀원 버튼-->
+        <div class="btn-area">
+            <button class="info-btn" id="btn_ys" value="yesung">
+                <div class="bondee-img">
+                    <img src="../images/bg/yesung.png" width="50" height="50" />
+                </div>
+                <div class="user-name">장예성</div>        
+            </button>
+            <button class="info-btn" id="btn_gy" value="gayeon">
+                <div class="bondee-img">
+                    <img src="../images/bg/gayeon.png" width="50" height="50" />
+                </div>
+                <div class="user-name">박가연</div>  
+            </button>
+            <button class="info-btn" id="btn_jh" value="jinho">
+                <div class="bondee-img">
+                    <img src="../images/bg/jinho.png" width="50" height="50" />
+                </div>
+                <div class="user-name">이진호</div>  
+            </button>
+            <button class="info-btn" id="btn_jy" value="jiye">
+                <div class="bondee-img">
+                    <img src="../images/bg/jiye.png" width="50" height="50" />
+                </div>
+                <div class="user-name">김지예</div>
+            </button>
+            <button class="info-btn" id="btn_gw" value="gunwoo">
+                <div class="bondee-img">
+                    <img src="../images/bg/gunwo.png" width="50" height="50" />
+                </div>
+                <div class="user-name">김건우</div>
+            </button>
+        </div>
     </aside>
+
+    <form class="item">
+        <div class="input-container">
+            <input type="text" required>
+            <label>방명록</label>
+            <span></span>
+        </div>
+        <button type="submit" class="send-btn">등록</button>
+    </form>
+
+    <div class="guest-note">
+        <div>
+            <div>방명록1</div>
+            <div>방명록2</div>
+            <div>방명록3</div>
+            <div>방명록4</div>
+            <div>방명록5</div>
+        </div>
+    </div>
     <footer>Copyright. we are chilchil</footer>
 
     <script src="../js/button.js"></script>
