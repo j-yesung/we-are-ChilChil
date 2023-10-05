@@ -1,31 +1,30 @@
 // 로드 시 자기소개 hide -> 버튼 클릭하면 hide/show
-$(document).ready(function() {
-  $("div").hide();
-    $("button").click(function() {
-       $("div").hide();
-       
-       if ($(this).hasClass("active")) {
-          $(".active").removeClass('active')
-       } else {
-          $(".active").removeClass('active')
-          $("." + $(this).val()).show()  
-          $(this).addClass('active')
-       }
-  
-    })  
-  })
+$(document).ready(function () {
+  $('.info-area').children().hide();
+  $('button').click(function () {
+    $('.info-area').children().hide();
+
+    if ($(this).hasClass('active')) {
+      $('.active').removeClass('active');
+    } else {
+      $('.active').removeClass('active');
+      $('.' + $(this).val()).show();
+      $(this).addClass('active');
+    }
+  });
+});
 
 // 뒤로가기
 function goBack() {
-    window.history.back();
+  window.history.back();
 }
 // 홈으로 이동
 function home() {
-    location.href = '../html/main.html';
+  location.href = '../html/main.html';
 }
 // 상세 페이지 이동
 function goContentsPage() {
-    location.href = '../html/contents.html';
+  location.href = '../html/contents.html';
 }
 
 /**
