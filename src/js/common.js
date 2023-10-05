@@ -1,3 +1,20 @@
+// 로드 시 자기소개 hide -> 버튼 클릭하면 hide/show
+$(document).ready(function() {
+  $("div").hide();
+    $("button").click(function() {
+       $("div").hide();
+       
+       if ($(this).hasClass("active")) {
+          $(".active").removeClass('active')
+       } else {
+          $(".active").removeClass('active')
+          $("." + $(this).val()).show()  
+          $(this).addClass('active')
+       }
+  
+    })  
+  })
+
 // 뒤로가기
 function goBack() {
     window.history.back();
