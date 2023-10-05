@@ -27,7 +27,14 @@ function initButton(members) {
         return $button;
     });
 }
+/* button의 aria-select를 모두 false로  변경하는 함수*/
+function removeAllSelected(e) {
+    if (!$(e.target).is($container)) return;
+    const $btns = $btnsContainer.find('button');
+    $btns.attr('aria-selected', 'false');
 
+    renderMainContent();
+}
 /* button 클릭 시 발생 이벤트 */
 function handleClickButton(e) {
     const $btn = $(e.currentTarget);
@@ -78,8 +85,8 @@ function tab(x) {
     console.log(x);
     return x;
 }
-
+/* debug Data */
 let weName = ['장예성', '박가연', '이진호', '김지예', '김건우'];
 $btnsContainer.append(initButton(weName.map((v) => ({ name: v, url: '' }))));
 
-$(document).on('click', handleClickDocument);
+$($container).on('click', removeAllSelected);
