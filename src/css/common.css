@@ -1,12 +1,19 @@
 @font-face {
-  font-family: 'KIMM_Bold';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KIMM_Bold.woff2')
+  font-family: 'Pretendard-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
+    format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Giants-Inline';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Inline.woff2')
     format('woff2');
-  font-weight: 700;
+  font-weight: normal;
   font-style: normal;
 }
 * {
-  font-family: 'KIMM_Bold';
+  font-family: 'Pretendard-Regular';
 }
 
 body {
@@ -41,8 +48,9 @@ footer {
 
 header {
   grid-area: header;
-  /* background-color: black; */
   color: black;
+  font-family: 'Giants-Inline';
+  font-size: 50px;
 }
 
 main {
@@ -188,6 +196,7 @@ footer {
   width: 100%;
   line-height: 1.8;
   margin-top: 10px;
+  font-family: 'Giants-Inline';
 }
 
 .send-btn {
@@ -219,10 +228,7 @@ h3 {
   margin-bottom: 30px;
   text-align: center;
 }
-.user img {
-  margin-bottom: 160px;
-  padding-left: 70px;
-}
+
 .balloon-text {
   text-align: center;
   color: white;
@@ -383,4 +389,53 @@ h3 {
   top: -21px;
   border-bottom: 15px solid transparent;
   transform: rotate(133deg);
+}
+
+h1{
+  color: #333;
+  border-bottom: 4px solid #000000;
+  padding-bottom: 5px;
+  position: relative;
+  font-size: 30px;
+  font-family: 'Giants-Inline';
+}
+
+h1:before{
+/*     content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-left: 4px solid #a79600;
+   */
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 30px;
+  bottom: -30px;
+  border: 15px solid;
+  border-color: #000000 transparent transparent #000000;
+}
+
+h1:after{
+/*     content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 49%;
+    width: 15px;
+    height: 31px;
+    transform: rotate(51deg);
+    border-right: 4px solid #a79600; */
+    
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 34px;
+  bottom: -20px;
+  border: 15px solid;
+  border-color: #fff transparent transparent #fff;
 }
