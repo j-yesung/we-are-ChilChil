@@ -1,28 +1,55 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8" />
-    <title>메인</title>
-    <link rel="stylesheet" href="../css/common.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  </head>
-  <body>
-    <!-- header -->
-    <header>
-      <h1>칠칠맞조</h1>
-      <div class="btn-right" onclick="home()">
-        <div class="icon icons-home"></div>
-      </div>
-    </header>
-    <!-- contents -->
-    <div class="container"></div>
-    <!-- JS에서 호출하는 버튼 태그들이 여기에 들어갑니다. -->
-    
-    <!-- footer -->
-    <div class="footer">
-      <p>Copyright. we are chilchil</p>
-    </div>
+    <head>
+        <meta charset="utf-8" />
+        <title>메인</title>
+        <link rel="stylesheet" href="../css/common.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <style>
+            .on {
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- header -->
+        <header>
+            <h1>칠칠맞조</h1>
+            <div class="btn-right" onclick="home()">
+                <div class="icon icons-home"></div>
+            </div>
+        </header>
+        <!-- contents -->
+        <div class="container">
+            <div class="btns-container">
+                <!-- 아래와 같이 들어오고 선택된 버튼의 경우 aria-selected 속성이 true가 됩니다.
+                    <div class="btn-box" aria-selected='false'>
+                        <button class="btn">
+                          <div class="bondee-img">
+                            <img src="/" width="50" height="50" />
+                          </div>
+                          <div class="text">${name}</div>
+                        </button>
+                      </div>
+                 -->
+            </div>
+            <div class="main-content-container">
+                <!-- 팀 소개 컨테이너 , on class는 해당 컨테이너 보여주는 클래스
+                  <div class="team-introduce-container on"></div> 
+                    팀원 소개 컨테이너
+                <div class="member-introduce-container" data-name="<팀원 이름>"></div> 
+              -->
+                <div class="team-introduce-container on">z</div>
+                <div class="member-introduce-container" data-name="장예성">z</div>
+                <div class="member-introduce-container" data-name="박가연">z</div>
+                <div class="member-introduce-container" data-name="이진호">z</div>
+                <div class="member-introduce-container" data-name="김지예">z</div>
+                <div class="member-introduce-container" data-name="김건우">z</div>
+            </div>
+        </div>
+        <!-- JS에서 호출하는 버튼 태그들이 여기에 들어갑니다. -->
 
+<<<<<<< HEAD
     <script src="../js/common.js"></script>
     <script src="../../test.js"></script>
     <script>
@@ -36,6 +63,25 @@
       //   });
       // });
     </script>
+=======
+        <!-- footer -->
+        <div class="footer">
+            <p>Copyright. we are chilchil</p>
+        </div>
+>>>>>>> de32adc7d0e53134bce436032b6b8b5d900a1457
 
-  </body>
+        <script src="../js/button.js"></script>
+        <script src="../js/common.js"></script>
+        <script>
+            // 버튼 클릭 시 상세 페이지 추가
+            // $(function () {
+            //   $('.btn').click(function () {
+            //     let contentHtml = `
+            //       <div style="text-align: center">${$(this).text()}</div>
+            //     `;
+            //     $(this).after(contentHtml);
+            //   });
+            // });
+        </script>
+    </body>
 </html>
