@@ -1,5 +1,5 @@
-const $container = $('.container');
-const $btnsContainer = $container.find('.btns-container');
+const $container = $('');
+const $btnsContainer = $('.btns-container');
 const $btnBoxes = $('<div class="btn-box"></div>');
 const $mainContentContainer = $container.find('.main-content-container');
 
@@ -78,8 +78,28 @@ function tab(x) {
     console.log(x);
     return x;
 }
+const members = [
+    {
+        name: '장예성',
+        url: '../images/nonebg/yesung.png',
+    },
+    {
+        name: '김지예',
+        url: '../images/nonebg/jiye.png',
+    },
+    {
+        name: '이진호',
+        url: '../images/nonebg/jinho.png',
+    },
+    {
+        name: '김건우',
+        url: '../images/nonebg/gunwo.png',
+    },
+    {
+        name: '박가연',
+        url: '../images/nonebg/gayeon.png',
+    },
+];
+$btnsContainer.append(initButton(members));
 
-let weName = ['장예성', '박가연', '이진호', '김지예', '김건우'];
-$btnsContainer.append(initButton(weName.map((v) => ({ name: v, url: '' }))));
-
-$(document).on('click', handleClickDocument);
+//$(document).on('click', handleClickDocument);
