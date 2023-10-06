@@ -44,7 +44,8 @@ export async function readGuestBooks() {
       console.log('Data: ', row, row.id);
       let docHtml = `
             <div class="guestbooks-box">${row['text']}
-                <button type="button" id="delete-btn">삭제</button>
+              <button type="button" class="warning-btn" id="delete-btn">삭제</button>
+              <button type="button" class="success-btn" id="delete-btn">수정</button>
             </div>
         `;
       $('.guestbooks-container').append(docHtml);
@@ -149,9 +150,19 @@ export async function isGuestbooksStatus() {
 
   // 방명록을 삭제할 때, 비밀번호를 입력해서 일치하면 삭제합니다.
   $('.guestbooks-box button').click(function () {
-    let pwd = prompt('비밀번호를 입력해 주세요.', '');
-    // 입력한 비밀번호를 함수의 파라미터로 전달합니다.
+    let pwd = prompt('비밀번호', '');
+
+    switch (pwd) {
+      case '':
+        alert('비밀번호를 입력해 주세요.');
+        return;
+      case null:
+        return;
+      default:
+        break;
+    }
     removeGuestBook(pwd);
+    window.location.reload();
   });
 }
 
@@ -164,6 +175,7 @@ $(document).ready(function () {
     const text = $('.write-data').val();  // 방명록 입력 값
     
     writeGuestBook(text, pwd);  // 방명록 작성 함수 호출
+    window.location.reload();
     $('#modalContainer').addClass('hidden');
   });
 });
