@@ -1,16 +1,7 @@
 /* 기본설정 */
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
-import {
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  getDoc,
-  getDocs,
-  getFirestore,
-  updateDoc,
-} from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, getFirestore, updateDoc } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -102,7 +93,7 @@ export async function removeGuestBook(pwd) {
   try {
     const docs = await getDocs(collection(db, 'guestbooks'));
     console.log(pwd, typeof pwd);
-    
+
     docs.forEach((docSnap) => {
       let row = docSnap.data();
       // 실제데이터 : getDoc(docRef)
@@ -115,9 +106,9 @@ export async function removeGuestBook(pwd) {
       }
     });
 
-    console.log('삭제완료')
+    console.log('삭제완료');
     return { msg: 'remove-success' };
-  } catch(e){
+  } catch (e) {
     console.error(e);
     return { msg: 'remove-fail' };
   }
@@ -165,17 +156,3 @@ export async function isGuestbooksStatus() {
     window.location.reload();
   });
 }
-
-$(document).ready(function () {
-  isGuestbooksStatus();
-
-  // 방명록 작성
-  $('#send-btn').click(function () {
-    const pwd = $('.pwd-data').val();     // 비밀번호 입력 값
-    const text = $('.write-data').val();  // 방명록 입력 값
-    
-    writeGuestBook(text, pwd);  // 방명록 작성 함수 호출
-    window.location.reload();
-    $('#modalContainer').addClass('hidden');
-  });
-});

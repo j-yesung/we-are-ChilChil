@@ -1,3 +1,4 @@
+import { isGuestbooksStatus } from './firebase.js';
 // 로드 시 자기소개 hide -> 버튼 클릭하면 hide/show
 $(document).ready(async function () {
   // info-area 채우기
@@ -6,6 +7,16 @@ $(document).ready(async function () {
   const result = await getDataPromise('../data/data.json');
   const data = result.data;
   $infoArea.append(data.map(makeInfoItem));
+  isGuestbooksStatus();
+
+  $('#send-btn').click(function () {
+    const pwd = $('.pwd-data').val(); // 비밀번호 입력 값
+    const text = $('.write-data').val(); // 방명록 입력 값
+
+    writeGuestBook(text, pwd); // 방명록 작성 함수 호출
+    window.location.reload();
+    $('#modalContainer').addClass('hidden');
+  });
 
   // 말풍선 숨기기
   $('.bubble').hide();
