@@ -1,0 +1,54 @@
+{
+    "data": [
+      {
+        "id": 1,
+        "name": "장예성",
+        "tmi": "내배캠 전 날 술 마심",
+        "mbti": "ESTJ",
+        "interesting": ["드라마 음악듣기", "Money", "개발", "여행", "프론트엔드", "커피", "누워있기"],
+        "introduce": "더 나은 미래를 향해~!",
+        "blog": "https://velog.io/@hisung-ah",
+        "img": ""
+      },
+      {
+        "id": 2,
+        "name": "박가연",
+        "tmi": "새끼손톱이 부러져서 슬펐다",
+        "mbti": "ENFP",
+        "interesting": ["IT", "반려동물", "수영", "여행", "러닝"],
+        "introduce": "절대! 후회하지 않기~",
+        "blog": "https://velog.io/@parkgaga",
+        "img:": ""
+      },
+      {
+        "id": 3,
+        "name": "이진호",
+        "tmi": "물을 매우 많이 마신다",
+        "mbti": "INTP",
+        "interesting": ["음악듣기", "front-end"],
+        "introduce": "우.리.는.할.수.있.다",
+        "blog": "https://velog.io/@dygmm4288",
+        "img:": ""
+      },
+      {
+        "id": 4,
+        "name": "김지예",
+        "tmi": "아무말 대잔치 매우 잘함",
+        "mbti": "INFP",
+        "interesting": ["게임", "만화", "운동", "개발자준비"],
+        "introduce": "전원수료 지옥까지 함께해요 ♥",
+        "blog": "https://velog.io/@haring6846",
+        "img": ""
+      },
+      {
+        "id": 5,
+        "name": "김건우",
+        "tmi": "곧 눈썹문신 할 예정",
+        "mbti": "ENFP",
+        "interesting": ["음악듣기", "영화", "러닝"],
+        "introduce": "전원 수료까지 화이팅 ! !",
+        "blog": "https://velog.io/@tony0929",
+        "img": ""
+      }
+    ]
+  }
