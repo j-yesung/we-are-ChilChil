@@ -26,30 +26,21 @@ $(document).ready(async function () {
       $(this).addClass('active');
     }
   });
+
+  // 모달 ON
+  $('#modalOpenButton').click(function (event) {
+    event.preventDefault();
+    let text = $('.write-data').val();
+    
+    if (text === '') {
+      return alert('방명록을 작성해 주세요.');
+    }
+    
+    $('.pwd-data').css('width', '150px');
+    $('#modalContainer').removeClass('hidden');
+  });
 });
 
-/**
- * 문서 로드 시 바로 실행되는 즉시 실행 함수입니다.
- * 중복되는 태그들이 많아서 한번에 일괄 처리 했습니다.
- */
-/* (function () {
-  let infomation = {};
-  let weName = ['장예성', '박가연', '이진호', '김지예', '김건우'];
-
-  weName.forEach(function (name) {
-    let contentHtml = `
-      <div class="btn-box">
-        <button class="btn">
-          <div class="bondee-img">
-            <img src="/" width="50" height="50" />
-          </div>
-          <div class="text">${name}</div>
-        </button>
-      </div>
-    `;
-    $('.container').append(contentHtml);
-  });
-})(); */
 // url을 입력으로 데이터 가져오는 함수
 async function getDataPromise(url) {
   const result = await fetch(url).then((result) => result.json());
