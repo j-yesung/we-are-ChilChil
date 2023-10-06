@@ -31,14 +31,19 @@ $(document).ready(async function () {
   $('#modalOpenButton').click(function (event) {
     event.preventDefault();
     let text = $('.write-data').val();
-    
+
     if (text === '') {
       return alert('방명록을 작성해 주세요.');
     }
-    
+
     $('.pwd-data').css('width', '150px');
     $('#modalContainer').removeClass('hidden');
   });
+});
+$('#modalContainer').on('click', (e) => {
+  if ($(e.target).is($('#modalContainer'))) {
+    $('#modalContainer').addClass('hidden');
+  }
 });
 
 // url을 입력으로 데이터 가져오는 함수
