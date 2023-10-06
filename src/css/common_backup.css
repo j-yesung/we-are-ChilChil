@@ -1,129 +1,165 @@
 @font-face {
-  font-family: "KIMM_Bold";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KIMM_Bold.woff2")
-    format("woff2");
-  font-weight: 700;
+  font-family: 'Pretendard-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Giants-Inline';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Inline.woff2') format('woff2');
+  font-weight: normal;
   font-style: normal;
 }
 * {
-  margin: 0;
-  padding: 0;
+  font-family: 'Pretendard-Regular';
 }
-header {
-  width: 100%;
-  position: relative;
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
+
+body {
+  font-size: 2rem;
+  font-weight: bold;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 0.2fr 1fr;
+  grid-template-rows: 100px auto auto auto auto 250px;
+  grid-template-areas:
+    'header header'
+    'side main'
+    'section section'
+    'item item'
+    'guest-note guest-note'
+    'footer footer';
+}
+
+header,
+main,
+aside,
+section,
+.item,
+.guest-note,
+footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
-  top: 0;
-  margin-bottom: 100px;
-  padding: 30px 0px 30px 0px;
-}
-h1 {
-  font-family: "KIMM_Bold";
-  font-size: 30px;
-}
-h2,
-button {
-  font-family: "KIMM_Bold";
-  font-size: 20px;
-  font-weight: 300;
-}
-p {
-  font-family: "KIMM_Bold";
-  font-size: 15px;
-}
-a {
-  color: inherit;
-  text-decoration: none;
 }
 
-@media (max-width: 480px) {
-  #jb-container {
-    width: auto;
-  }
-  #jb-content {
-    float: none;
-    width: auto;
-  }
-  #jb-sidebar {
-    float: none;
-    width: auto;
-  }
+header {
+  grid-area: header;
+  color: black;
+  font-family: 'Giants-Inline';
+  font-size: 50px;
 }
 
-/* 여기서부터는 버튼 관련 CSS입니다. */
-/* 이전, 홈 버튼 */
-.btn-left {
-  margin: 40px 0px 0px 30px;
-}
-.btn-right {
-  margin: 40px 30px 0px 0px;
-}
-.btn-left,
-.btn-right {
-  position: absolute;
-  top: 12px;
-  width: 30px;
-  height: 30px;
-  display: inline-block;
+main {
+  grid-area: main;
 }
 
-.btn-left .icon,
-.btn-right .icon {
-  vertical-align: middle;
-  color: inherit;
-  width: 30px;
-  height: 30px;
-  overflow: hidden;
-  text-indent: -999px;
+aside {
+  grid-area: side;
+  /* background-color: #ff9d00; */
+  /* display: flex; */
+  /* width: 50px; */
 }
-.btn-left .icon:before,
-.btn-right .icon:before {
-  display: none;
-}
-.btn-left .icon.icons-left,
-.btn-right .icon.icons-left {
-  background: url("../images/icon_ui.png") no-repeat -30px 0;
-  background-size: auto 60px;
-}
-.btn-left .icon.icons-home,
-.btn-right .icon.icons-home {
-  background: url("../images/icon_ui.png") no-repeat -60px 0;
-  background-size: auto 60px;
-}
-.btn-left:hover .icon,
-.btn-right:hover .icon,
-.btn-left:active .icon,
-.btn-right:active .icon {
-  background-position-y: -30px;
-}
-.btn-left {
-  left: 10px;
-}
-.btn-right {
-  right: 10px;
-}
-/* 버튼 CSS 끝 */
 
-.container {
-  width: 100%;
+section {
+  grid-area: section;
+}
+
+.item {
+  grid-area: item;
+}
+
+.input-container {
   position: relative;
-  height: 90vh;
-  padding-left: 200px;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column; /* 수직 정렬 */
-  /* align-items: center; */
-  justify-content: center;
+  width: 300px;
+  margin-left: 50px;
+  margin-top: 90px;
 }
 
-.container .btn {
+input {
+  font-size: 15px;
+  color: #222222;
+  width: 300px;
+  border: none;
+  border-bottom: solid #aaaaaa 1px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  position: relative;
+  background: none;
+  z-index: 5;
+}
+
+input::placeholder {
+  color: #aaaaaa;
+}
+input:focus {
+  outline: none;
+}
+
+span {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0%; /* right로만 바꿔주면 오 - 왼 */
+  background-color: #666;
+  width: 0;
+  height: 2px;
+  border-radius: 2px;
+  transition: 0.5s;
+}
+
+label {
+  position: absolute;
+  color: #aaa;
+  left: 10px;
+  font-size: 20px;
+  bottom: 8px;
+  transition: all 0.2s;
+}
+
+input:focus ~ label,
+input:valid ~ label {
+  font-size: 16px;
+  bottom: 40px;
+  color: #666;
+  font-weight: bold;
+}
+
+input:focus ~ span,
+input:valid ~ span {
+  width: 100%;
+}
+
+.guest-note {
+  grid-area: guest-note;
+}
+
+footer {
+  grid-area: footer;
+  background-color: black;
+  color: white;
+  font-size: 15px;
+  margin-top: 200px;
+}
+
+.text:after {
+  content: '';
+  display: block;
+  width: 60px;
+  border-bottom: 1px solid #bcbcbc;
+  margin: 20px auto;
+}
+
+.btn-area {
+  width: 100%;
+  margin: 10px;
+  padding-left: 100px;
+}
+
+.info-btn {
   justify-content: space-between;
-  width: 15%;
+  width: 200px;
   margin: 10px;
   display: flex;
   outline: 0;
@@ -140,41 +176,263 @@ a {
   line-height: 1;
   transition: transform 200ms;
 }
-.btn:hover {
+.info-btn:hover {
   transform: translateY(-4px);
 }
-.container .btn:after {
+.info-btn:after {
   margin-top: 10px;
   margin-left: auto;
   display: inline-block;
-  content: "";
+  content: '';
   width: 30px;
   height: 30px;
-  background: url("../images/icon_ui.png") no-repeat -150px 0;
+  background: url('../images/icon_ui.png') no-repeat -158px 0;
   background-size: auto 60px;
 }
-.container .btn .text {
+
+.user-name {
   width: 100%;
   line-height: 1.8;
   margin-top: 10px;
-  /* text-align: right; */
-}
-.container .btn-box {
-  width: 100%;
+  font-family: 'Giants-Inline';
 }
 
-.footer {
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
-  bottom: 0;
-  position: fixed;
-  clear: both;
-  padding: 20px 0px 20px 0px;
+.send-btn {
+  cursor: pointer;
+  outline: 0;
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.5;
   text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  /* ################################## */
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 6px 12px;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  color: #0d6efd;
+  border-color: #0d6efd;
+  margin: 112px 0px 12px 30px;
+}
+.send-btn:hover {
+  color: #fff;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
 }
 
+/* 말풍선 */
+h3 {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.balloon-text {
+  text-align: center;
+  color: white;
+  padding-top: 30px;
+}
+
+.balloon-01 {
+  position: relative;
+  margin: 30px;
+  width: 255px;
+  height: 105px;
+  padding: 1px;
+  background: #a2a4a4;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.balloon-01:after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 12px 9px 0;
+  border-color: #a2a4a4 transparent;
+  display: block;
+  width: 0;
+  z-index: 1;
+  bottom: -12px;
+  left: 251px;
+  top: 97px;
+  border-bottom: 15px solid transparent;
+  transform: rotate(-44deg);
+}
+.balloon-02 {
+  position: relative;
+  margin: 30px;
+  width: 255px;
+  height: 105px;
+  padding: 1px;
+  background: #a2a4a4;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.balloon-02:after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 12px 9px 0;
+  border-color: #a2a4a4 transparent;
+  display: block;
+  width: 0;
+  z-index: 1;
+  right: -14px;
+  top: 46px;
+  transform: rotate(-90deg);
+}
+.balloon-03 {
+  position: relative;
+  margin: 30px;
+  width: 255px;
+  height: 105px;
+  padding: 1px;
+  background: #a2a4a4;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.balloon-03:after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 12px 9px 0;
+  border-color: #a2a4a4 transparent;
+  display: block;
+  width: 0;
+  z-index: 1;
+  left: 248px;
+  top: 0px;
+  transform: rotate(-6deg);
+}
+.balloon-04 {
+  position: relative;
+  margin: 30px;
+  width: 255px;
+  height: 105px;
+  padding: 1px;
+  background: #a2a4a4;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.balloon-04:after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 12px 9px 0;
+  border-color: #a2a4a4 transparent;
+  display: block;
+  width: 0;
+  z-index: 1;
+  left: -6px;
+  top: 99px;
+  transform: rotate(-71deg);
+}
+.balloon-05 {
+  position: relative;
+  margin: 30px;
+  width: 255px;
+  height: 105px;
+  padding: 1px;
+  background: #a2a4a4;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.balloon-05:after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 12px 9px 0;
+  border-color: #a2a4a4 transparent;
+  display: block;
+  width: 0;
+  z-index: 1;
+  left: -21px;
+  top: 42px;
+  border-bottom: 15px solid transparent;
+  transform: rotate(90deg);
+}
+.balloon-06 {
+  position: relative;
+  margin: 30px;
+  width: 255px;
+  height: 105px;
+  padding: 1px;
+  background: #a2a4a4;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.balloon-06:after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 12px 9px 0;
+  border-color: #a2a4a4 transparent;
+  display: block;
+  width: 0;
+  z-index: 1;
+  bottom: 95px;
+  left: -15px;
+  top: -21px;
+  border-bottom: 15px solid transparent;
+  transform: rotate(133deg);
+}
+
+h1 {
+  color: #333;
+  border-bottom: 4px solid #000000;
+  padding-bottom: 5px;
+  position: relative;
+  font-size: 30px;
+  font-family: 'Giants-Inline';
+}
+
+h1:before {
+  /*     content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-left: 4px solid #a79600;
+   */
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 30px;
+  bottom: -30px;
+  border: 15px solid;
+  border-color: #000000 transparent transparent #000000;
+}
+
+h1:after {
+  /*     content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 49%;
+    width: 15px;
+    height: 31px;
+    transform: rotate(51deg);
+    border-right: 4px solid #a79600; */
+
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 34px;
+  bottom: -20px;
+  border: 15px solid;
+  border-color: #fff transparent transparent #fff;
+}
