@@ -321,6 +321,9 @@ h3 {
 .blog .balloon-text .desc {
   font-size: 0.4em;
 }
+.blog .balloon-text .desc a {
+  color: white;
+}
 .balloon-list .list {
   padding: 0;
   margin: 0;

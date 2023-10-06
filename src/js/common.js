@@ -131,6 +131,10 @@ function makeInfoItem(data) {
 function makeTextBubble(label, desc) {
   const $label = $(`<div class="label">${label}</div>`);
   const $desc = $(`<div class="desc">${desc}</div>`);
+  if (label === '블로그') {
+    $desc.text('');
+    $desc.append($(`<a href="${desc}">${desc}</a>`));
+  }
   const $wrapper = $('<div class="balloon-text"></div>');
 
   $wrapper.append([$label, $desc]);
