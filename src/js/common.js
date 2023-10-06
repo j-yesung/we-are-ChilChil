@@ -28,7 +28,6 @@ $(document).ready(async function () {
   });
 });
 
-
 /**
  * 문서 로드 시 바로 실행되는 즉시 실행 함수입니다.
  * 중복되는 태그들이 많아서 한번에 일괄 처리 했습니다.
@@ -83,6 +82,12 @@ function makeInfoItem(data) {
     advantage: advantage,
     blog: blog,
   };
+  const infoMap = {
+    MBTI: 'MBTI',
+    TMI: 'TMI',
+    advantage: '장점',
+    blog: '블로그',
+  };
   const bubbleObject = {
     MBTI: $bubbleMBTI,
     TMI: $bubbleTMI,
@@ -91,8 +96,8 @@ function makeInfoItem(data) {
   };
 
   // 데이터 동적 넣기 (text)
-  Object.keys(textInfo).forEach((label) => {
-    bubbleObject[label].append(makeTextBubble(label, textInfo[label]));
+  Object.keys(textInfo).forEach((key) => {
+    bubbleObject[key].append(makeTextBubble(infoMap[key], textInfo[key]));
   });
   // 데이터 동적 넣기 (list)
   const interesting1 = interesting.slice(0, interesting.length / 2),
