@@ -28,7 +28,7 @@ body {
     'side main'
     'section section'
     'item item'
-    'guest-note guest-note'
+    'guestbooks guestbooks'
     'footer footer';
 }
 header,
@@ -36,7 +36,7 @@ main,
 aside,
 section,
 .item,
-.guest-note,
+.guestbooks,
 footer {
   display: flex;
   justify-content: center;
@@ -69,19 +69,18 @@ section {
 
 .item {
   grid-area: item;
+  margin-bottom: 20px;
 }
 
 .input-container {
   position: relative;
   width: 300px;
-  margin-left: 50px;
-  margin-top: 90px;
 }
 
 input {
   font-size: 15px;
   color: #222222;
-  width: 300px;
+  width: 287px;
   border: none;
   border-bottom: solid #aaaaaa 1px;
   padding-bottom: 10px;
@@ -123,17 +122,17 @@ input:focus ~ label,
 input:valid ~ label {
   font-size: 16px;
   bottom: 40px;
-  color: #666;
+  color: #0485e8;
   font-weight: bold;
 }
 
-input:focus ~ span,
-input:valid ~ span {
-  width: 100%;
+.guestbooks {
+  grid-area: guestbooks;
 }
 
-.guest-note {
-  grid-area: guest-note;
+.guestbooks-container {
+  width: 900px;
+  padding-left: 520px;
 }
 
 footer {
@@ -198,7 +197,7 @@ footer {
   font-family: 'Giants-Inline';
 }
 
-.send-btn {
+.primary-btn {
   cursor: pointer;
   outline: 0;
   display: inline-block;
@@ -213,9 +212,9 @@ footer {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   color: #0d6efd;
   border-color: #0d6efd;
-  margin: 112px 0px 12px 30px;
+  margin: 10px 0px 0px 30px;
 }
-.send-btn:hover {
+.primary-btn:hover {
   color: #fff;
   background-color: #0d6efd;
   border-color: #0d6efd;
@@ -347,15 +346,6 @@ h1 {
 }
 
 h1:before {
-  /*     content: '';
-    position: absolute;
-    bottom: -20px;
-    left: 50%;
-    width: 20px;
-    height: 20px;
-    background: white;
-    border-left: 4px solid #a79600;
-   */
   content: ' ';
   position: absolute;
   width: 0;
@@ -367,15 +357,6 @@ h1:before {
 }
 
 h1:after {
-  /*     content: '';
-    position: absolute;
-    bottom: -20px;
-    left: 49%;
-    width: 15px;
-    height: 31px;
-    transform: rotate(51deg);
-    border-right: 4px solid #a79600; */
-
   content: ' ';
   position: absolute;
   width: 0;
@@ -406,4 +387,43 @@ h1:after {
 .info-area .user.info-item img {
   width: 200px;
   height: 300px;
+}
+/* === 모달 css === */
+#modalOpenButton,
+#modalCloseButton {
+  cursor: pointer;
+}
+
+#modalContainer {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 6;
+}
+
+#modalContent {
+  position: absolute;
+  background-color: #ffffff;
+  width:175px;
+  height: 110px;
+  padding: 40px 15px 15px 15px;
+}
+
+#modalContent p {
+  font-size: 18px;
+}
+
+#modalContainer.hidden {
+  display: none;
+}
+
+#send-btn {
+  float: right;
+  margin-top: 30px;
 }

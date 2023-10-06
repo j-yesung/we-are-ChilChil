@@ -48,63 +48,75 @@
       <!-- 자기 소개 글 -->
     </main>
 
-    <aside>
-      <!--팀원 버튼-->
-      <div class="btn-area">
-        <button class="info-btn" id="btn_ys" value="yesung">
-          <div class="bondee-img">
-            <img src="../images/bg/yesung.png" width="50" height="50" />
-          </div>
-          <div class="user-name">장예성</div>
-        </button>
-        <button class="info-btn" id="btn_gy" value="gayeon">
-          <div class="bondee-img">
-            <img src="../images/bg/gayeon.png" width="50" height="50" />
-          </div>
-          <div class="user-name">박가연</div>
-        </button>
-        <button class="info-btn" id="btn_jh" value="jinho">
-          <div class="bondee-img">
-            <img src="../images/bg/jinho.png" width="50" height="50" />
-          </div>
-          <div class="user-name">이진호</div>
-        </button>
-        <button class="info-btn" id="btn_jy" value="jiye">
-          <div class="bondee-img">
-            <img src="../images/bg/jiye.png" width="50" height="50" />
-          </div>
-          <div class="user-name">김지예</div>
-        </button>
-        <button class="info-btn" id="btn_gw" value="gunwoo">
-          <div class="bondee-img">
-            <img src="../images/bg/gunwo.png" width="50" height="50" />
-          </div>
-          <div class="user-name">김건우</div>
-        </button>
-      </div>
-    </aside>
+  <aside>
+    <!--팀원 버튼-->
+    <div class="btn-area">
+      <button class="info-btn" id="btn_ys" value="yesung">
+        <div class="bondee-img">
+          <img src="../images/bg/yesung.png" width="50" height="50" />
+        </div>
+        <div class="user-name">장예성</div>
+      </button>
+      <button class="info-btn" id="btn_gy" value="gayeon">
+        <div class="bondee-img">
+          <img src="../images/bg/gayeon.png" width="50" height="50" />
+        </div>
+        <div class="user-name">박가연</div>
+      </button>
+      <button class="info-btn" id="btn_jh" value="jinho">
+        <div class="bondee-img">
+          <img src="../images/bg/jinho.png" width="50" height="50" />
+        </div>
+        <div class="user-name">이진호</div>
+      </button>
+      <button class="info-btn" id="btn_jy" value="jiye">
+        <div class="bondee-img">
+          <img src="../images/bg/jiye.png" width="50" height="50" />
+        </div>
+        <div class="user-name">김지예</div>
+      </button>
+      <button class="info-btn" id="btn_gw" value="gunwoo">
+        <div class="bondee-img">
+          <img src="../images/bg/gunwo.png" width="50" height="50" />
+        </div>
+        <div class="user-name">김건우</div>
+      </button>
+    </div>
+  </aside>
 
-    <form class="item">
+  <form class="item">
+    <div class="input-container">
+      <input type="text" class="write-data" required />
+      <label>방명록</label>
+      <span></span>
+    </div>
+    <button type="submit" class="primary-btn" id="modalOpenButton">
+      등록
+    </button>
+  </form>
+
+  <div class="guestbooks">
+    <div class="guestbooks-container">
+      <!-- FireBase 에서 방명록 가져옵니다. -->
+    </div>
+  </div>
+  <footer>Copyright. we are chilchil</footer>
+
+  <!-- 등록 모달 창 -->
+  <div id="modalContainer" class="hidden">
+    <div id="modalContent">
+      <!-- 비밀번호 입력 -->
       <div class="input-container">
-        <input type="text" required />
-        <label>방명록</label>
+        <input type="text" class="pwd-data" required />
+        <label>비밀번호</label>
         <span></span>
       </div>
-      <button type="submit" class="send-btn">등록</button>
-    </form>
-
-    <div class="guest-note">
-      <div>
-        <div>방명록1</div>
-        <div>방명록2</div>
-        <div>방명록3</div>
-        <div>방명록4</div>
-        <div>방명록5</div>
-      </div>
+      <button type="button" class="primary-btn" id="send-btn">확인</button>
     </div>
-    <footer>Copyright. we are chilchil</footer>
+  </div>
 
     <script src="../js/button.js"></script>
     <script src="../js/common.js" type="module"></script>
+    <script src="../js/firebase.js" type="module"></script>
   </body>
 </html>
