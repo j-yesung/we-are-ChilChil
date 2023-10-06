@@ -135,6 +135,10 @@ input:valid ~ label {
   padding-left: 520px;
 }
 
+.guestbooks-box {
+  width: 433px;
+}
+
 footer {
   grid-area: footer;
   background-color: black;
@@ -206,13 +210,12 @@ footer {
   text-align: center;
   background-color: transparent;
   border: 1px solid transparent;
-  padding: 6px 12px;
   font-size: 1rem;
   border-radius: 0.25rem;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   color: #0d6efd;
   border-color: #0d6efd;
-  margin: 10px 0px 0px 30px;
+  margin: 25px 0px 0px 37px;
 }
 .primary-btn:hover {
   color: #fff;
@@ -426,4 +429,50 @@ h1:after {
 #send-btn {
   float: right;
   margin-top: 30px;
+}
+
+.warning-btn {
+  float: right;
+  cursor: pointer;
+  outline: 0;
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  background-color: transparent;
+  border: 1px solid transparent;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  color: #fa572a;
+  border-color: #fa572a;
+  margin: 10px 0px 0px 10px;
+}
+.warning-btn:hover {
+  color: #fff;
+  background-color: #fa572a;
+  border-color: #fa572a;
+}
+
+.success-btn {
+  float: right;
+  cursor: pointer;
+  outline: 0;
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  background-color: transparent;
+  border: 1px solid transparent;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  color: #00ca36;
+  border-color: #37d7ad;
+  margin: 10px 0px 0px 30px;
+}
+.success-btn:hover {
+  color: #fff;
+  background-color: #37d7ad;
+  border-color: #37d7ad;
 }
