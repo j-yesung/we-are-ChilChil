@@ -28,18 +28,6 @@ $(document).ready(async function () {
   });
 });
 
-// 뒤로가기
-function goBack() {
-  window.history.back();
-}
-// 홈으로 이동
-function home() {
-  location.href = '../html/main.html';
-}
-// 상세 페이지 이동
-function goContentsPage() {
-  location.href = '../html/contents.html';
-}
 
 /**
  * 문서 로드 시 바로 실행되는 즉시 실행 함수입니다.
