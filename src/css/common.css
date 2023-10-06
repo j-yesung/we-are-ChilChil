@@ -327,8 +327,8 @@ h3 {
   list-style: none;
   display: flex;
   gap: 5px;
-  flex-wrap: nowrap;
-  overflow: hidden;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .balloon-list .list-item {
   font-size: 0.4em;
