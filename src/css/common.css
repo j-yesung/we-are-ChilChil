@@ -31,6 +31,7 @@ body {
     'guestbook-form guestbook-form'
     'guestbooks guestbooks'
     'footer footer';
+  overflow-x: hidden;
 }
 header,
 main,
@@ -494,7 +495,7 @@ h1:after {
   min-width: 800px;
   box-sizing: border-box;
 
-  background: url('../images/everybody.png') no-repeat top right 10px/40%;
+  background: url('../images/everybody.png') no-repeat top right 10px/436px 280px;
 }
 .info-area .group-left {
   position: absolute;
