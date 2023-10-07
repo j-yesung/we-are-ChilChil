@@ -50,7 +50,13 @@ $(document).ready(async function () {
     $('.pwd-data').css('width', '150px');
     $('#modalContainer').removeClass('hidden');
   });
+
+  // 스크롤 맨 위로 옮기는 동작
+  const $btnScrollTop = $('.scroll-up-btn button');
+  console.log($btnScrollTop);
+  $btnScrollTop.on('click', moveScrollTop);
 });
+
 $('#modalContainer').on('click', (e) => {
   if ($(e.target).is($('#modalContainer'))) {
     $('#modalContainer').addClass('hidden');
@@ -164,6 +170,15 @@ function makeListBubble(label, listItems) {
   $wrapper.append([$label, $list]);
 
   return $wrapper;
+}
+
+// 페이지 최상단 이동 함수
+function moveScrollTop() {
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: 'smooth',
+  });
 }
 
 /* debug 함수 */

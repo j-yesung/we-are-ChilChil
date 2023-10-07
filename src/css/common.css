@@ -535,3 +535,40 @@ h1:after {
 .guestbooks-container {
   flex-direction: column;
 }
+
+/* === 스크롤 업 버튼 CSS */
+.blind {
+  text-indent: -9999em;
+}
+
+.scroll-up-btn button {
+  width: 60px;
+  height: 60px;
+  background: url('../images/icon_ui.png') no-repeat;
+  background-size: auto 90px;
+  background-position: -38px 7px;
+  transform: rotate(90deg);
+  outline: none;
+  border: 1px solid black;
+  padding: 5px;
+  border-radius: 10px;
+
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
+  animation: 1.5s updown infinite;
+
+  position: fixed;
+  bottom: 150px;
+  right: 30px;
+  cursor: pointer;
+}
+@keyframes updown {
+  from {
+    background-position: -35px 7px;
+  }
+  50% {
+    background-position: -38px 7px;
+  }
+  to {
+    background-position: -35px 7px;
+  }
+}
