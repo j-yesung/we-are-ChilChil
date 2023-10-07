@@ -22,11 +22,12 @@ body {
   margin: 0;
   display: grid;
   grid-template-columns: 0.2fr 1fr;
-  grid-template-rows: 100px 900px auto auto auto 250px;
+  grid-template-rows: 100px 900px auto auto auto auto 250px;
   grid-template-areas:
     'header header'
     'side main'
     'section section'
+    'welcome welcome'
     'guestbook-form guestbook-form'
     'guestbooks guestbooks'
     'footer footer';
@@ -186,7 +187,7 @@ footer {
   background-size: auto 60px;
 }
 .info-btn.active {
-  background: #000;
+  background: #a2a4a4;
   color: #fff;
 }
 
@@ -393,7 +394,7 @@ h1:after {
 }
 
 /* === 모달 css === */
-#modalOpenButton,
+/* #modalOpenButton,
 #modalCloseButton {
   cursor: pointer;
 }
@@ -430,8 +431,15 @@ h1:after {
 #send-btn {
   float: right;
   margin-top: 30px;
+ } */
+.nickname {
+  position: static;
+  display: inline-block;
+  width: auto;
+  height: auto;
+  background-color: transparent;
+  font-size: 0.5em;
 }
-
 .warning-btn {
   float: right;
   cursor: pointer;
@@ -568,4 +576,18 @@ h1:after {
   to {
     background-position: -35px 7px;
   }
+}
+
+/* === welcome CSS */
+.welcome {
+  grid-area: welcome;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.welcome h4 {
+  padding: 0;
+  margin: 0;
 }

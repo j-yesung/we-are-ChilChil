@@ -260,10 +260,14 @@ async function renderGuestBook(type, guestBooks) {
   const $guestBooksBoxes = docs.map(({ email, nickname, text, id }) => {
     const $guestBooksBox = $(`<div class="guestbooks-box" data-id="${id}"></div>`);
     const $text = $(`<p class="guestbook-text">${text}</p>`);
+    const $controlContainer = $('<div class="control-container"></div>');
+    const $nickname = $(`<span class="nickname">${nickname}</span>`);
     const $warningBtn = $(`<button type="button" class="warning-btn" >삭제</button>`);
     const $updateBtn = $(`<button type="button" data-type="update" class="success-btn">수정</button>`);
 
-    $guestBooksBox.append([$text, $warningBtn, $updateBtn]);
+    $controlContainer.append([$nickname, $warningBtn, $updateBtn]);
+
+    $guestBooksBox.append([$text, $controlContainer]);
 
     // 삭제 이벤트
 
