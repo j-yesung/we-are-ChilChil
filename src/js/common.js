@@ -1,4 +1,4 @@
-import { onAuthChange, readGuestBooks, removeGuestBook, signOutUser, signUser, userInfo, writeGuestBook } from '../js/firebase.js';
+import { onAuthChange, readGuestBooks, removeGuestBook, signOutUser, signUser, updateGuestBook, userInfo, writeGuestBook } from '../js/firebase.js';
 // 로드 시 자기소개 hide -> 버튼 클릭하면 hide/show
 let GgusetBooks = [];
 $(document).ready(async function () {
@@ -261,7 +261,7 @@ async function renderGuestBook(type, guestBooks) {
     const $guestBooksBox = $(`<div class="guestbooks-box" data-id="${id}"></div>`);
     const $text = $(`<p class="guestbook-text">${text}</p>`);
     const $warningBtn = $(`<button type="button" class="warning-btn" >삭제</button>`);
-    const $updateBtn = $(`<button type="button" class="success-btn">수정</button>`);
+    const $updateBtn = $(`<button type="button" data-type="update" class="success-btn">수정</button>`);
 
     $guestBooksBox.append([$text, $warningBtn, $updateBtn]);
 
@@ -269,13 +269,46 @@ async function renderGuestBook(type, guestBooks) {
 
     $warningBtn.on('click', () => {
       if (!userInfo) {
-        alert('로그인 후 이용하실 수 있습니다.');
+        return alert('로그인 후 이용하실 수 있습니다.');
       }
-      console.log(id, GgusetBooks);
+      if (userInfo.email !== email) {
+        return alert('방명록을 남긴 사용자가 아니면 삭제할 수 없습니다!');
+      }
       GgusetBooks = GgusetBooks.filter((guestBook) => guestBook.id !== id);
 
       renderGuestBook('local', GgusetBooks);
       removeGuestBook(id);
+    });
+
+    $updateBtn.on('click', () => {
+      if (!userInfo) {
+        return alert('로그인 후 이용하실 수 있습니다.');
+      }
+      if (userInfo.email !== email) {
+        return alert('방명록을 남긴 사용자가 아니면 수정할 수 없습니다!');
+      }
+      const type = $updateBtn.data('type');
+      if (type === 'update') {
+        // '수정'버튼 상태라면
+        // p태그를 input태그로 변경해주고
+        $guestBooksBox.find('.guestbook-text').replaceWith(`<input type="text" value="${text}" required/>`);
+        // 수정 버튼의 data-type을 complete로 변경해 주고 내부 텍스트를 수정 완료로 변경해준다.
+        $updateBtn.data('type', 'complete').text('수정 완료');
+      }
+      if (type === 'complete') {
+        // '수정 완료' 버튼 상태라면
+        const $input = $guestBooksBox.find('input');
+        const nextText = $input.val();
+
+        $input.replaceWith(`<p class="guestbox-text">${nextText}</p>`);
+        $updateBtn.data('type', 'update').text('수정');
+
+        GgusetBooks = GgusetBooks.map((guestBook) => {
+          if (guestBook.id !== id) return guestBook;
+          guestBook.text = nextText;
+        });
+        updateGuestBook(id, nextText);
+      }
     });
 
     return $guestBooksBox;

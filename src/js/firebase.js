@@ -61,19 +61,13 @@ export async function writeGuestBook(email, nickname, text) {
 /**
  * 특정 방명록을 업데이트 하는 함수
  * @param {string} id
- * @param {string} pwd
  * @param {string} text
  * @returns {object} {msg: 방명록 업데이트 성공 실패 메시지, 비밀번호 미일치 메시지}
  */
-export async function updateGuestBook(id, pwd, text) {
+export async function updateGuestBook(id, text) {
   try {
     const docRef = doc(db, 'guestbooks', id);
-    const docSnap = await getDoc(docRef);
     // 비밀번호가 미일치 할 경우에
-    if (docSnap.data().pwd !== pwd)
-      return {
-        msg: 'invalid-password',
-      };
     updateDoc(docRef, { text });
     return { msg: 'update-success' };
   } catch {
