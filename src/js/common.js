@@ -246,11 +246,12 @@ function makeListBubble(label, listItems) {
 
 async function renderGuestBook(type, guestBooks) {
   // 1. 방명록을 가져온다
-  let docs = guestBooks;
+  let docs = guestBooks || [];
   if (type === 'server') {
     const { msg, data } = await readGuestBooks();
     if (msg === 'read-fail') {
       console.error('read guest book fail');
+      renderGuestBook('local', GgusetBooks);
       return;
     }
     docs = data;
@@ -271,18 +272,7 @@ async function renderGuestBook(type, guestBooks) {
 
     // 삭제 이벤트
 
-    $warningBtn.on('click', () => {
-      if (!userInfo) {
-        return alert('로그인 후 이용하실 수 있습니다.');
-      }
-      if (userInfo.email !== email) {
-        return alert('방명록을 남긴 사용자가 아니면 삭제할 수 없습니다!');
-      }
-      GgusetBooks = GgusetBooks.filter((guestBook) => guestBook.id !== id);
-
-      renderGuestBook('local', GgusetBooks);
-      removeGuestBook(id);
-    });
+    $warningBtn.on('click', handleRemoveGuestBook(id, email));
 
     $updateBtn.on('click', () => {
       if (!userInfo) {
@@ -319,6 +309,20 @@ async function renderGuestBook(type, guestBooks) {
   });
 
   $('.guestbooks-container').html('').append($guestBooksBoxes);
+}
+function handleRemoveGuestBook(id, email) {
+  return () => {
+    if (!userInfo) {
+      return alert('로그인 후 이용하실 수 있습니다.');
+    }
+    if (userInfo.email !== email) {
+      return alert('방명록을 남긴 사용자가 아니면 삭제할 수 없습니다!');
+    }
+    GgusetBooks = GgusetBooks.filter((guestBook) => guestBook.id !== id);
+
+    renderGuestBook('local', GgusetBooks);
+    removeGuestBook(id);
+  };
 }
 
 // 페이지 최상단 이동 함수

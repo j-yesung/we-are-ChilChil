@@ -34,7 +34,7 @@ export async function readGuestBooks() {
   try {
     const docSnap = await getDocs(collection(db, 'guestbooks'));
     const docs = docSnap.docs;
-    return { data: docs.map((v) => ({ id: v.id, ...v.data(), msg: 'read-success' })) };
+    return { data: docs.map((v) => ({ id: v.id, ...v.data() })), msg: 'read-success' };
   } catch (e) {
     console.error(e);
     return { data: [], msg: 'read-fail' };
