@@ -105,7 +105,7 @@ $(document).ready(async function () {
     },
     () => {
       // 로그인 상태가 아닐 시
-      $('.logout-btn').hidden();
+      $('.logout-btn').hide();
       $('.welcome h4').text('');
     },
   );
