@@ -1,13 +1,16 @@
-import { onAuthChange, signOutUser, signUser, userInfo, writeGuestBook } from '../js/firebase.js';
+import { onAuthChange, readGuestBooks, removeGuestBook, signOutUser, signUser, userInfo, writeGuestBook } from '../js/firebase.js';
 // 로드 시 자기소개 hide -> 버튼 클릭하면 hide/show
+let GgusetBooks = [];
 $(document).ready(async function () {
   // info-area 채우기
   const $infoArea = $('.info-area');
 
   const result = await getDataPromise('../data/data.json');
   const data = result.data;
+
+  /* 초기화 함수들  */
   $infoArea.append(data.map(makeInfoItem));
-  //isGuestbooksStatus();
+  renderGuestBook('server');
 
   /* $('#send-btn').click(function () {
     const pwd = $('.pwd-data').val(); // 비밀번호 입력 값
@@ -18,7 +21,7 @@ $(document).ready(async function () {
     $('#modalContainer').addClass('hidden');
   }); */
 
-  // 말풍선 숨기기
+  /* ======== 말풍선 관련 함수들 ======== */
   $('.bubble').hide();
   // 자기 소개 숨기기
   $('.info-area').children('.user').hide();
@@ -38,9 +41,53 @@ $(document).ready(async function () {
     }
   });
 
+  /* ======== 방명록 관련 함수들 ======== */
+  // 방명록 등록 이벤트 함수
+  $('#enroll-guestbook-btn').click(async function (event) {
+    event.preventDefault();
+    let text = $('.write-data').val();
+
+    if (!userInfo) {
+      return alert('로그인을 해주세요!');
+    }
+    if (text === '') {
+      return alert('방명록을 작성해 주세요.');
+    }
+
+    const email = userInfo.email;
+    const nickname = userInfo.reloadUserInfo.screenName;
+    const { msg } = await writeGuestBook(email, nickname, text);
+
+    if (msg === 'write-success') {
+      // [TODO] : add reloading guestbook container;
+      const data = { email, nickname, text };
+      GgusetBooks = guestBooks.concat([data]);
+      renderGuestBook('local', GgusetBooks);
+      alert('등록이 완료됐습니다!');
+      return;
+    }
+    alert('등록에 실패했습니다.');
+  });
+
+  // 방명록을 삭제할 때, 현재 userInfo의 이메일과 등록된 이메일이 같을 경우 없앤다.
+  $('.guestbooks-box .warning-btn').click(function () {
+    console.log('here');
+    if (!userInfo) {
+      alert('로그인 후 이용하실 수 있습니다.');
+    }
+    const $container = $(this).parent();
+    const id = $container.data('id');
+    console.log(id);
+    guestBooks = guestBooks.filter((guestBook) => guestBook.id !== id);
+
+    renderGuestBook('local', guestBooks);
+    removeGuestBook(id);
+  });
+
+  /* ======== 로그인 관련 함수들 ======== */
+  // 사용자가 방명록을 남기려 input에 focus를 했을 때 로그인을 하지 않았다면 로그인 알림이 발생한다.
   $('.input-container input').on('focus', (e) => {
     // 로그인 상태가 아니라면
-    console.log(userInfo);
     if (!userInfo) {
       alert('로그인이 필요합니다.');
       e.currentTarget.blur();
@@ -48,71 +95,31 @@ $(document).ready(async function () {
       return;
     }
   });
-
-  // 로그인 상태에 따른 조작 함수
+  // 로그인 상태에 따른 DOM 조작 함수
+  // onAuthChange(onSuccess: function , onFail : function)
   onAuthChange(
     (user) => {
       // 로그인 상태일 시
+      $('.logout-btn').show();
       $('.welcome h4').text(`안녕하세요! ${user.reloadUserInfo.screenName}님!`);
     },
     () => {
       // 로그인 상태가 아닐 시
+      $('.logout-btn').hidden();
       $('.welcome h4').text('');
     },
   );
-
+  // 로그아웃 버튼을 눌렀을 경우 발생하는 이벤트 함수
   $('.logout-btn').on('click', () => {
-    console.log('click logout btn, user Info is : ', userInfo);
     if (!userInfo) return;
     signOutUser();
   });
 
-  // 방명록 등록 이벤트 함수
-  $('#enroll-guestbook-btn').click(async function (event) {
-    event.preventDefault();
-    let text = $('.write-data').val();
-
-    if (text === '') {
-      return alert('방명록을 작성해 주세요.');
-    }
-    if (!userInfo) {
-      return alert('로그인을 해주세요!');
-    }
-    const email = userInfo.email;
-    const nickname = userInfo.reloadUserInfo.screenName;
-    const { msg } = await writeGuestBook(email, nickname, text);
-
-    if (msg === 'write-success') {
-      // [TODO] : add reloading guestbook container;
-      alert('등록이 완료됐습니다!');
-      return;
-    }
-    alert('등록에 실패했습니다.');
-  });
-
   /* 로그인 모달 이벤트들.. login modal events */
-
   $('#modalContainer').on('click', (e) => {
     if ($(e.target).is($('#modalContainer'))) {
       $('#modalContainer').addClass('hidden');
     }
-  });
-
-  // 방명록을 삭제x할 때, 비밀번호를 입력해서 일치하면 삭제합니다.
-  $('.guestbooks-box button').click(function () {
-    let pwd = prompt('비밀번호', '');
-
-    switch (pwd) {
-      case '':
-        alert('비밀번호를 입력해 주세요.');
-        return;
-      case null:
-        return;
-      default:
-        break;
-    }
-    removeGuestBook(pwd);
-    window.location.reload();
   });
 
   // 스크롤 맨 위로 옮기는 동작
@@ -227,6 +234,54 @@ function makeListBubble(label, listItems) {
   $wrapper.append([$label, $list]);
 
   return $wrapper;
+}
+/**
+ * 방명록을 렌더링 해주는 함수
+ * @param {'local'|'server'} type
+ * @param {[GuestBook]} guestBooks
+ * @returns void
+ * type이 'local'일 경우 입력으로 주어진 guestBooks를 이용하여 렌더링 하고
+ * type이 'server'일 경우 서버에서 새로운 데이터를 가져온다.
+ */
+
+async function renderGuestBook(type, guestBooks) {
+  // 1. 방명록을 가져온다
+  let docs = guestBooks;
+  if (type === 'server') {
+    const { msg, data } = await readGuestBooks();
+    if (msg === 'read-fail') {
+      console.error('read guest book fail');
+      return;
+    }
+    docs = data;
+    GgusetBooks = data;
+  }
+  // 2. 가져온 방명록을 동적으로 넣어준다.
+  const $guestBooksBoxes = docs.map(({ email, nickname, text, id }) => {
+    const $guestBooksBox = $(`<div class="guestbooks-box" data-id="${id}"></div>`);
+    const $text = $(`<p class="guestbook-text">${text}</p>`);
+    const $warningBtn = $(`<button type="button" class="warning-btn" >삭제</button>`);
+    const $updateBtn = $(`<button type="button" class="success-btn">수정</button>`);
+
+    $guestBooksBox.append([$text, $warningBtn, $updateBtn]);
+
+    // 삭제 이벤트
+
+    $warningBtn.on('click', () => {
+      if (!userInfo) {
+        alert('로그인 후 이용하실 수 있습니다.');
+      }
+      console.log(id, GgusetBooks);
+      GgusetBooks = GgusetBooks.filter((guestBook) => guestBook.id !== id);
+
+      renderGuestBook('local', GgusetBooks);
+      removeGuestBook(id);
+    });
+
+    return $guestBooksBox;
+  });
+
+  $('.guestbooks-container').html('').append($guestBooksBoxes);
 }
 
 // 페이지 최상단 이동 함수

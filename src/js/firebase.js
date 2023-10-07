@@ -28,24 +28,15 @@ const provider = new GithubAuthProvider();
 
 /**
  * 방명록 목록을 가져오는 함수
- * @returns {object} {data: [{text,id}] , msg : 방명록 성공 실패 메시지}
+ * @returns {object} {data: [{email,text,nickname, id}] , msg : 방명록 성공 실패 메시지}
  */
 export async function readGuestBooks() {
   try {
-    const docs = await getDocs(collection(db, 'guestbooks'));
-
-    docs.forEach((doc) => {
-      let row = doc.data();
-      console.log('Data: ', row, row.id);
-      let docHtml = `
-            <div class="guestbooks-box">${row['text']}
-              <button type="button" class="warning-btn" id="delete-btn">삭제</button>
-              <button type="button" class="success-btn" id="delete-btn">수정</button>
-            </div>
-        `;
-      $('.guestbooks-container').append(docHtml);
-    });
-  } catch {
+    const docSnap = await getDocs(collection(db, 'guestbooks'));
+    const docs = docSnap.docs;
+    return { data: docs.map((v) => ({ id: v.id, ...v.data(), msg: 'read-success' })) };
+  } catch (e) {
+    console.error(e);
     return { data: [], msg: 'read-fail' };
   }
 }
@@ -92,26 +83,11 @@ export async function updateGuestBook(id, pwd, text) {
 /**
  * 특정 방명록을 제거하는 함수
  * @param {string} id
- * @param {string} pwd
  * @returns {object} {msg: 방명록 삭제 성공 실패 메시지, 비밀번호 미일치 메시지}
  */
-export async function removeGuestBook(pwd) {
+export async function removeGuestBook(id) {
   try {
-    const docs = await getDocs(collection(db, 'guestbooks'));
-    console.log(pwd, typeof pwd);
-
-    docs.forEach((docSnap) => {
-      let row = docSnap.data();
-      // 실제데이터 : getDoc(docRef)
-      // id값이 없네요 x
-      // docRef.id o
-      // docData.id -> undefined
-
-      if (pwd == row.pwd) {
-        return deleteDoc(doc(db, 'guestbooks', docSnap.id));
-      }
-    });
-
+    await deleteDoc(doc(db, 'guestbooks', id));
     console.log('삭제완료');
     return { msg: 'remove-success' };
   } catch (e) {
@@ -155,24 +131,13 @@ export let userInfo = null;
 export async function signUser() {
   signInWithPopup(auth, provider)
     .then((result) => {
-      // This gives you a GitHub Access Token. You can use it to access the GitHub API.
-      const credential = GithubAuthProvider.credentialFromResult(result);
-      //const token = credential.accessToken;
-
-      // The signed-in user info.
       userInfo = result.user;
-      // IdP data available using getAdditionalUserInfo(result)
-      // ...
     })
     .catch((error) => {
       // Handle Errors here.
       const errorCode = error.code;
       const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.customData.email;
-      // The AuthCredential type that was used.
-      const credential = GithubAuthProvider.credentialFromError(error);
-      // ...
+      console.error(errorCode, errorMessage);
     });
 }
 /**
