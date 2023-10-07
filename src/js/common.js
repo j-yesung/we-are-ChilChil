@@ -66,7 +66,7 @@ async function getDataPromise(url) {
 function makeInfoItem(data) {
   const { id, name, tmi, mbti, interesting, introduce, img, advantage, blog } = data;
   const $infoItem = $(`<div class="${id} user info-item"></div>`);
-  const $heading = $(`<h3>안녕하세요.<br/>저는 ${name}입니다.</h3>`);
+  const $heading = $(`<h3>안녕하세요.<br/>저는 <strong>${name}</strong>입니다.</h3>`);
   const $introduceContainer = $('<div class="introduce-container"></div>');
   const $introduce = $(`<p>${introduce}</p>`);
   const $bubbleSpeechContainer = $('<div class="bubble-speech-container"></div>');
