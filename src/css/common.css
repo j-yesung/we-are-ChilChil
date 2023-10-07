@@ -535,7 +535,9 @@ h1:after {
 .blind {
   text-indent: -9999em;
 }
-
+.scroll-up-btn {
+  position: absolute;
+}
 .scroll-up-btn button {
   width: 60px;
   height: 60px;
