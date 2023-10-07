@@ -27,7 +27,7 @@ body {
     'header header'
     'side main'
     'section section'
-    'item item'
+    'guestbook-form guestbook-form'
     'guestbooks guestbooks'
     'footer footer';
 }
@@ -35,7 +35,7 @@ header,
 main,
 aside,
 section,
-.item,
+.guestbook-form,
 .guestbooks,
 .guestbooks-container,
 footer {
@@ -68,8 +68,8 @@ section {
   grid-area: section;
 }
 
-.item {
-  grid-area: item;
+.guestbook-form {
+  grid-area: guestbook-form;
   margin-bottom: 20px;
 }
 

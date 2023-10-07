@@ -1,4 +1,4 @@
-import { isGuestbooksStatus } from './firebase.js';
+import { onAuthChange, signOutUser, signUser, userInfo, writeGuestBook } from '../js/firebase.js';
 // 로드 시 자기소개 hide -> 버튼 클릭하면 hide/show
 $(document).ready(async function () {
   // info-area 채우기
@@ -7,16 +7,16 @@ $(document).ready(async function () {
   const result = await getDataPromise('../data/data.json');
   const data = result.data;
   $infoArea.append(data.map(makeInfoItem));
-  isGuestbooksStatus();
+  //isGuestbooksStatus();
 
-  $('#send-btn').click(function () {
+  /* $('#send-btn').click(function () {
     const pwd = $('.pwd-data').val(); // 비밀번호 입력 값
     const text = $('.write-data').val(); // 방명록 입력 값
 
     writeGuestBook(text, pwd); // 방명록 작성 함수 호출
-    window.location.reload();
+    //window.location.reload();
     $('#modalContainer').addClass('hidden');
-  });
+  }); */
 
   // 말풍선 숨기기
   $('.bubble').hide();
@@ -38,29 +38,86 @@ $(document).ready(async function () {
     }
   });
 
-  // 모달 ON
-  $('#modalOpenButton').click(function (event) {
+  $('.input-container input').on('focus', (e) => {
+    // 로그인 상태가 아니라면
+    console.log(userInfo);
+    if (!userInfo) {
+      alert('로그인이 필요합니다.');
+      e.currentTarget.blur();
+      signUser();
+      return;
+    }
+  });
+
+  // 로그인 상태에 따른 조작 함수
+  onAuthChange(
+    (user) => {
+      // 로그인 상태일 시
+      $('.welcome h4').text(`안녕하세요! ${user.reloadUserInfo.screenName}님!`);
+    },
+    () => {
+      // 로그인 상태가 아닐 시
+      $('.welcome h4').text('');
+    },
+  );
+
+  $('.logout-btn').on('click', () => {
+    console.log('click logout btn, user Info is : ', userInfo);
+    if (!userInfo) return;
+    signOutUser();
+  });
+
+  // 방명록 등록 이벤트 함수
+  $('#enroll-guestbook-btn').click(async function (event) {
     event.preventDefault();
     let text = $('.write-data').val();
 
     if (text === '') {
       return alert('방명록을 작성해 주세요.');
     }
+    if (!userInfo) {
+      return alert('로그인을 해주세요!');
+    }
+    const email = userInfo.email;
+    const nickname = userInfo.reloadUserInfo.screenName;
+    const { msg } = await writeGuestBook(email, nickname, text);
 
-    $('.pwd-data').css('width', '150px');
-    $('#modalContainer').removeClass('hidden');
+    if (msg === 'write-success') {
+      // [TODO] : add reloading guestbook container;
+      alert('등록이 완료됐습니다!');
+      return;
+    }
+    alert('등록에 실패했습니다.');
+  });
+
+  /* 로그인 모달 이벤트들.. login modal events */
+
+  $('#modalContainer').on('click', (e) => {
+    if ($(e.target).is($('#modalContainer'))) {
+      $('#modalContainer').addClass('hidden');
+    }
+  });
+
+  // 방명록을 삭제x할 때, 비밀번호를 입력해서 일치하면 삭제합니다.
+  $('.guestbooks-box button').click(function () {
+    let pwd = prompt('비밀번호', '');
+
+    switch (pwd) {
+      case '':
+        alert('비밀번호를 입력해 주세요.');
+        return;
+      case null:
+        return;
+      default:
+        break;
+    }
+    removeGuestBook(pwd);
+    window.location.reload();
   });
 
   // 스크롤 맨 위로 옮기는 동작
   const $btnScrollTop = $('.scroll-up-btn button');
-  console.log($btnScrollTop);
   $btnScrollTop.on('click', moveScrollTop);
-});
-
-$('#modalContainer').on('click', (e) => {
-  if ($(e.target).is($('#modalContainer'))) {
-    $('#modalContainer').addClass('hidden');
-  }
 });
 
 // url을 입력으로 데이터 가져오는 함수

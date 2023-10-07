@@ -75,17 +75,19 @@
     </div>
   </aside>
 
-  <form class="item">
+  <form class="guestbook-form">
     <div class="input-container">
       <input type="text" class="write-data" required />
       <label>방명록</label>
       <span></span>
     </div>
-    <button type="submit" class="primary-btn" id="modalOpenButton">
+    <button type="submit" class="primary-btn" id="enroll-guestbook-btn">
       등록
     </button>
   </form>
-
+<div class="welcome">
+  <h4></h4>
+</div>
   <div class="guestbooks">
     <div class="guestbooks-container">
       <!-- FireBase 에서 방명록 가져옵니다. -->
@@ -94,6 +96,9 @@
   <div class="scroll-up-btn">
     <button class="blind">up</button>
   </div>
+  <button class="logout-btn">
+    로그아웃
+  </button>
   <footer>Copyright. we are chilchil</footer>
 
   <!-- 등록 모달 창 -->

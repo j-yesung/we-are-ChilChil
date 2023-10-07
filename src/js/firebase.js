@@ -1,6 +1,8 @@
 /* 기본설정 */
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
+
+import { GithubAuthProvider, getAuth, onAuthStateChanged, signInWithPopup, signOut } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js';
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, getFirestore, updateDoc } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -21,6 +23,8 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
+const provider = new GithubAuthProvider();
 
 /**
  * 방명록 목록을 가져오는 함수
@@ -47,16 +51,18 @@ export async function readGuestBooks() {
 }
 /**
  * 방명록을 작성하는 함수
+ * @param {string} email
+ * @param {string} nickname
  * @param {string} text
- * @param {string} pwd
  * @returns {object} {msg : 방명록 작성 성공 실패 메시지}
  */
-export async function writeGuestBook(text, pwd) {
+export async function writeGuestBook(email, nickname, text) {
+  console.log({ email, nickname, text });
   try {
-    await addDoc(collection(db, 'guestbooks'), { text, pwd });
-    console.log(text, pwd);
+    await addDoc(collection(db, 'guestbooks'), { email, nickname, text });
     // ref에 id 자동 저장
-  } catch {
+  } catch (e) {
+    console.error(e);
     return { msg: 'write-fail' };
   }
   return { msg: 'write-success' };
@@ -138,21 +144,51 @@ export async function readGuestBook(id) {
 export async function isGuestbooksStatus() {
   await readGuestBooks();
   console.log('방명록 불러오기 완료');
+}
 
-  // 방명록을 삭제할 때, 비밀번호를 입력해서 일치하면 삭제합니다.
-  $('.guestbooks-box button').click(function () {
-    let pwd = prompt('비밀번호', '');
+/* Auth 관련 함수들... */
+export let userInfo = null;
 
-    switch (pwd) {
-      case '':
-        alert('비밀번호를 입력해 주세요.');
-        return;
-      case null:
-        return;
-      default:
-        break;
+/**
+ * 회원가입 하는 함수
+ */
+export async function signUser() {
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+      const credential = GithubAuthProvider.credentialFromResult(result);
+      //const token = credential.accessToken;
+
+      // The signed-in user info.
+      userInfo = result.user;
+      // IdP data available using getAdditionalUserInfo(result)
+      // ...
+    })
+    .catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.customData.email;
+      // The AuthCredential type that was used.
+      const credential = GithubAuthProvider.credentialFromError(error);
+      // ...
+    });
+}
+/**
+ * 로그아웃 하는 함수
+ */
+export async function signOutUser() {
+  signOut(auth);
+}
+export function onAuthChange(onSuccess, onFail) {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      userInfo = user;
+      onSuccess(user);
+    } else {
+      userInfo = null;
+      onFail();
     }
-    removeGuestBook(pwd);
-    window.location.reload();
   });
 }
