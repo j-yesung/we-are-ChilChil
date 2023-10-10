@@ -22,20 +22,22 @@ body {
   margin: 0;
   display: grid;
   grid-template-columns: 0.2fr 1fr;
-  grid-template-rows: 100px 900px auto auto auto 250px;
+  grid-template-rows: 100px 900px auto auto auto auto 250px;
   grid-template-areas:
     'header header'
     'side main'
     'section section'
-    'item item'
+    'welcome welcome'
+    'guestbook-form guestbook-form'
     'guestbooks guestbooks'
     'footer footer';
+  overflow-x: hidden;
 }
 header,
 main,
 aside,
 section,
-.item,
+.guestbook-form,
 .guestbooks,
 .guestbooks-container,
 footer {
@@ -53,23 +55,19 @@ header {
 
 main {
   grid-area: main;
-  /* background-color: green; */
   padding-right: 20%;
 }
 
 aside {
   grid-area: side;
-  /* background-color: #ff9d00; */
-  /* display: flex; */
-  /* width: 50px; */
 }
 
 section {
   grid-area: section;
 }
 
-.item {
-  grid-area: item;
+.guestbook-form {
+  grid-area: guestbook-form;
   margin-bottom: 20px;
 }
 
@@ -131,11 +129,6 @@ input:valid ~ label {
   grid-area: guestbooks;
 }
 
-.guestbooks-container {
-  /* width: 900px;
-  padding-left: 520px; */
-}
-
 .guestbooks-box {
   width: 433px;
 }
@@ -179,7 +172,7 @@ footer {
   font-size: 18px;
   font-weight: 700;
   line-height: 1;
-  transition: transform 200ms;
+  transition: transform 200ms, background 200ms, color 200ms;
 }
 .info-btn:hover {
   transform: translateY(-4px);
@@ -193,6 +186,10 @@ footer {
   height: 30px;
   background: url('../images/icon_ui.png') no-repeat -158px 0;
   background-size: auto 60px;
+}
+.info-btn.active {
+  background: #a2a4a4;
+  color: #fff;
 }
 
 .user-name {
@@ -226,9 +223,12 @@ footer {
 
 /* 말풍선 */
 
-h3 {
+.info-item h3 {
   margin-bottom: 30px;
   text-align: center;
+}
+.info-item h3 strong {
+  font-size: 1.25em;
 }
 .bubble-speech-container {
   display: flex;
@@ -254,6 +254,7 @@ h3 {
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
 }
 .bubble:after {
   content: '';
@@ -394,45 +395,52 @@ h1:after {
 }
 
 /* === 모달 css === */
-#modalOpenButton,
-#modalCloseButton {
-  cursor: pointer;
+/* #modalOpenButton,
+  #modalCloseButton {
+    cursor: pointer;
+  }
+  
+  #modalContainer {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 6;
+  }
+  
+  #modalContent {
+    position: absolute;
+    background-color: #ffffff;
+    width: 175px;
+    height: 110px;
+    padding: 40px 15px 15px 15px;
+  }
+  
+  #modalContent p {
+    font-size: 18px;
+  }
+  
+  #modalContainer.hidden {
+    display: none;
+  }
+  
+  #send-btn {
+    float: right;
+    margin-top: 30px;
+   } */
+.nickname {
+  position: static;
+  display: inline-block;
+  width: auto;
+  height: auto;
+  background-color: transparent;
+  font-size: 0.5em;
 }
-
-#modalContainer {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 6;
-}
-
-#modalContent {
-  position: absolute;
-  background-color: #ffffff;
-  width: 175px;
-  height: 110px;
-  padding: 40px 15px 15px 15px;
-}
-
-#modalContent p {
-  font-size: 18px;
-}
-
-#modalContainer.hidden {
-  display: none;
-}
-
-#send-btn {
-  float: right;
-  margin-top: 30px;
-}
-
 .warning-btn {
   float: right;
   cursor: pointer;
@@ -487,7 +495,7 @@ h1:after {
   min-width: 800px;
   box-sizing: border-box;
 
-  background: url('../images/everybody.png') no-repeat top right 10px/40%;
+  background: url('../images/everybody.png') no-repeat top right 10px/436px 280px;
 }
 .info-area .group-left {
   position: absolute;
@@ -530,4 +538,57 @@ h1:after {
 /* === 방명록 CSS === */
 .guestbooks-container {
   flex-direction: column;
+}
+
+/* === 스크롤 업 버튼 CSS */
+.blind {
+  text-indent: -9999em;
+}
+.scroll-up-btn {
+  position: absolute;
+}
+.scroll-up-btn button {
+  width: 60px;
+  height: 60px;
+  background: url('../images/icon_ui.png') no-repeat;
+  background-size: auto 90px;
+  background-position: -38px 7px;
+  transform: rotate(90deg);
+  outline: none;
+  border: 1px solid black;
+  padding: 5px;
+  border-radius: 10px;
+
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
+  animation: 1.5s updown infinite;
+
+  position: fixed;
+  bottom: 150px;
+  right: 30px;
+  cursor: pointer;
+}
+@keyframes updown {
+  from {
+    background-position: -35px 7px;
+  }
+  50% {
+    background-position: -38px 7px;
+  }
+  to {
+    background-position: -35px 7px;
+  }
+}
+
+/* === welcome CSS */
+.welcome {
+  grid-area: welcome;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.welcome h4 {
+  padding: 0;
+  margin: 0;
 }
