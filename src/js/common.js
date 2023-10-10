@@ -285,7 +285,9 @@ async function renderGuestBook(type, guestBooks) {
       if (type === 'update') {
         // '수정'버튼 상태라면
         // p태그를 input태그로 변경해주고
-        $guestBooksBox.find('.guestbook-text').replaceWith(`<input type="text" value="${text}" required/>`);
+        const prevText = $guestBooksBox.find('.guestbook-text').text();
+        console.log(prevText);
+        $guestBooksBox.find('.guestbook-text').replaceWith(`<input type="text" value="${prevText}" required/>`);
         // 수정 버튼의 data-type을 complete로 변경해 주고 내부 텍스트를 수정 완료로 변경해준다.
         $updateBtn.data('type', 'complete').text('수정 완료');
       }
@@ -294,7 +296,7 @@ async function renderGuestBook(type, guestBooks) {
         const $input = $guestBooksBox.find('input');
         const nextText = $input.val();
 
-        $input.replaceWith(`<p class="guestbox-text">${nextText}</p>`);
+        $input.replaceWith(`<p class="guestbook-text">${nextText}</p>`);
         $updateBtn.data('type', 'update').text('수정');
 
         GgusetBooks = GgusetBooks.map((guestBook) => {
