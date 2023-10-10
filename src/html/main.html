@@ -106,12 +106,18 @@
   <div id="modalContainer" class="hidden">
     <div id="modalContent">
       <!-- 비밀번호 입력 -->
-      <div class="input-container">
+      <div class="input-container gb">
+        <input type="text" class="gb-data" required />
+        <label>방명록</label>
+        <span></span>
+      </div>
+      <div class="input-container pwd">
         <input type="text" class="pwd-data" required />
         <label>비밀번호</label>
         <span></span>
       </div>
       <button type="button" class="primary-btn" id="send-btn">확인</button>
+      <button type="button" class="primary-btn" id="update-btn">수정</button>
     </div>
   </div>
 

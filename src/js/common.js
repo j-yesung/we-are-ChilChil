@@ -1,4 +1,4 @@
-import { isGuestbooksStatus } from './firebase.js';
+import { isGuestbooksStatus, writeGuestBook } from './firebase.js';
 // 로드 시 자기소개 hide -> 버튼 클릭하면 hide/show
 $(document).ready(async function () {
   // info-area 채우기
@@ -10,8 +10,8 @@ $(document).ready(async function () {
   isGuestbooksStatus();
 
   $('#send-btn').click(function () {
-    const pwd = $('.pwd-data').val(); // 비밀번호 입력 값
-    const text = $('.write-data').val(); // 방명록 입력 값
+    const pwd = $('.pwd-data').val();     // 비밀번호 입력 값
+    const text = $('.write-data').val();  // 방명록 입력 값
 
     writeGuestBook(text, pwd); // 방명록 작성 함수 호출
     window.location.reload();
@@ -38,7 +38,7 @@ $(document).ready(async function () {
     }
   });
 
-  // 모달 ON
+  // 모달 ON => [등록] 버튼
   $('#modalOpenButton').click(function (event) {
     event.preventDefault();
     let text = $('.write-data').val();
@@ -48,7 +48,15 @@ $(document).ready(async function () {
     }
 
     $('.pwd-data').css('width', '150px');
+    $('#modalContent').css({
+      'width': '175px',
+      'height': '130px',
+      'padding': '15px'
+    });
     $('#modalContainer').removeClass('hidden');
+    $('#modalContainer > #modalContent').children('.gb').hide();
+    $('#modalContainer > #modalContent').children('#send-btn').show();
+    $('#modalContainer > #modalContent').children('#update-btn').hide();
   });
 });
 $('#modalContainer').on('click', (e) => {

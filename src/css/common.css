@@ -426,7 +426,8 @@ h1:after {
   display: none;
 }
 
-#send-btn {
+#send-btn,
+#update-btn {
   float: right;
   margin-top: 30px;
 }
