@@ -20,10 +20,15 @@ function changeText() {
   const texts = ['개발자', '꿈나무', '칠칠맞조'];
   let curIndex = 0;
   // 시작 : toFlag == fales, 끝 플래그 : toFlag === true
+  let backTimeout = null;
+  let forwardTimeout = null;
 
   return () => {
-    let backTimeout = null;
-    let forwardTimeout = null;
+    forwardTimeout = moveForward(texts[curIndex++]);
+    curIndex %= texts.length;
+    setTimeout(() => {
+      backTimeout = moveBack();
+    }, 1500);
     setInterval(() => {
       // 특정 초 안에 아래 동작을 완수한다.
       if (backTimeout) clearInterval(backTimeout);
@@ -33,7 +38,7 @@ function changeText() {
       curIndex %= texts.length;
       setTimeout(() => {
         backTimeout = moveBack();
-      }, 1000);
+      }, 1500);
     }, 3500);
   };
 }
