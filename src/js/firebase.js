@@ -50,13 +50,13 @@ export async function readGuestBooks() {
 export async function writeGuestBook(email, nickname, text) {
   console.log({ email, nickname, text });
   try {
-    await addDoc(collection(db, 'guestbooks'), { email, nickname, text });
+    const docRef = await addDoc(collection(db, 'guestbooks'), { email, nickname, text });
     // ref에 id 자동 저장
+    return { msg: 'write-success', id: docRef.id };
   } catch (e) {
     console.error(e);
     return { msg: 'write-fail' };
   }
-  return { msg: 'write-success' };
 }
 /**
  * 특정 방명록을 업데이트 하는 함수

@@ -56,12 +56,12 @@ $(document).ready(async function () {
 
     const email = userInfo.email;
     const nickname = userInfo.reloadUserInfo.screenName;
-    const { msg } = await writeGuestBook(email, nickname, text);
+    const { msg, id } = await writeGuestBook(email, nickname, text);
 
     if (msg === 'write-success') {
       // [TODO] : add reloading guestbook container;
-      const data = { email, nickname, text };
-      GgusetBooks = guestBooks.concat([data]);
+      const data = { email, nickname, text, id };
+      GgusetBooks = GgusetBooks.concat([data]);
       renderGuestBook('local', GgusetBooks);
       alert('등록이 완료됐습니다!');
       return;
@@ -311,7 +311,9 @@ async function renderGuestBook(type, guestBooks) {
   $('.guestbooks-container').html('').append($guestBooksBoxes);
 }
 function handleRemoveGuestBook(id, email) {
+  console.log('handle remove guest book curry', id);
   return () => {
+    console.log('handle remove guest book', id);
     if (!userInfo) {
       return alert('로그인 후 이용하실 수 있습니다.');
     }
