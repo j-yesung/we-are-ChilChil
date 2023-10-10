@@ -26,7 +26,6 @@ body {
   margin-top: 20px;
   display: grid;
   grid-template-columns: 0.2fr 1fr;
-  grid-template-rows: 100px 900px auto auto auto auto 250px;
   grid-template-areas:
     'side main'
     'section section'
@@ -57,6 +56,7 @@ header {
   top: 15px;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 1;
 }
 main {
   grid-area: main;
@@ -347,8 +347,8 @@ footer {
 }
 /* 말풍선 끝 */
 h1 {
-  color: #333;
-  border-bottom: 4px solid #000000;
+  color: #ffffff;
+  border-bottom: 4px solid #ffffff;
   padding-bottom: 5px;
   position: relative;
   font-size: 30px;
@@ -363,9 +363,9 @@ h1:before {
   left: 30px;
   bottom: -30px;
   border: 15px solid;
-  border-color: #000000 transparent transparent #000000;
+  border-color: #ffffff transparent transparent #ffffff;
 }
-
+/* 
 h1:after {
   content: ' ';
   position: absolute;
@@ -375,7 +375,7 @@ h1:after {
   bottom: -20px;
   border: 15px solid;
   border-color: #fff transparent transparent #fff;
-}
+} */
 
 /* main-content layout */
 .main-content {
