@@ -18,20 +18,22 @@ body {
   font-size: 2rem;
   font-weight: bold;
   width: 100vw;
-  height: 100vh;
   margin: 0;
+  overflow-x: hidden;
+}
+.wrapper {
+  width: 100vw;
+  margin-top: 20px;
   display: grid;
   grid-template-columns: 0.2fr 1fr;
   grid-template-rows: 100px 900px auto auto auto auto 250px;
   grid-template-areas:
-    'header header'
     'side main'
     'section section'
     'welcome welcome'
     'guestbook-form guestbook-form'
     'guestbooks guestbooks'
     'footer footer';
-  overflow-x: hidden;
 }
 header,
 main,
@@ -47,12 +49,15 @@ footer {
 }
 
 header {
-  grid-area: header;
-  color: black;
+  color: white;
   font-family: 'Giants-Inline';
   font-size: 50px;
+  
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
 }
-
 main {
   grid-area: main;
   padding-right: 20%;
@@ -101,7 +106,7 @@ span {
   position: absolute;
   bottom: 0;
   left: 0%; /* right로만 바꿔주면 오 - 왼 */
-  background-color: #666;
+  /* background-color: #666; */
   width: 0;
   height: 2px;
   border-radius: 2px;

@@ -12,15 +12,6 @@ $(document).ready(async function () {
   $infoArea.append(data.map(makeInfoItem));
   renderGuestBook('server');
 
-  /* $('#send-btn').click(function () {
-    const pwd = $('.pwd-data').val(); // 비밀번호 입력 값
-    const text = $('.write-data').val(); // 방명록 입력 값
-
-    writeGuestBook(text, pwd); // 방명록 작성 함수 호출
-    //window.location.reload();
-    $('#modalContainer').addClass('hidden');
-  }); */
-
   /* ======== 말풍선 관련 함수들 ======== */
   $('.bubble').hide();
   // 자기 소개 숨기기
