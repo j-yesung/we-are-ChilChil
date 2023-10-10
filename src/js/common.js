@@ -322,6 +322,7 @@ function handleRemoveGuestBook(id, email) {
     if (userInfo.email !== email) {
       return alert('방명록을 남긴 사용자가 아니면 삭제할 수 없습니다!');
     }
+    if (!confirm('정말 삭제하시겠습니까?')) return;
     GgusetBooks = GgusetBooks.filter((guestBook) => guestBook.id !== id);
 
     renderGuestBook('local', GgusetBooks);
