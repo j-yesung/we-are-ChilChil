@@ -63,6 +63,7 @@ $(document).ready(async function () {
       const data = { email, nickname, text, id };
       GgusetBooks = GgusetBooks.concat([data]);
       renderGuestBook('local', GgusetBooks);
+      $('.write-data').val('');
       alert('등록이 완료됐습니다!');
       return;
     }
