@@ -34,7 +34,7 @@ function changeText() {
       setTimeout(() => {
         backTimeout = moveBack();
       }, 1000);
-    }, 3000);
+    }, 3500);
   };
 }
 
