@@ -8,7 +8,7 @@
       "interesting": ["드라마 음악듣기", "Money", "개발", "여행", "프론트엔드", "커피", "누워있기"],
       "introduce": "더 나은 미래를 향해~!",
       "blog": "https://velog.io/@hisung-ah",
-      "img": "/src/images/upperBody/yesung.png",
+      "img": "../images/upperBody/yesung.png",
       "advantage": "안되면 되게 하라"
     },
     {
@@ -19,7 +19,7 @@
       "interesting": ["IT", "반려동물", "수영", "여행", "러닝"],
       "introduce": "절대! 후회하지 않기~",
       "blog": "https://velog.io/@parkgaga",
-      "img": "/src/images/upperBody/gayeon.png",
+      "img": "../images/upperBody/gayeon.png",
       "advantage": "배움을 게을리 하지 않는다"
     },
     {
@@ -30,7 +30,7 @@
       "interesting": ["음악듣기", "front-end"],
       "introduce": "우.리.는.할.수.있.다",
       "blog": "https://velog.io/@dygmm4288",
-      "img": "/src/images/upperBody/jinho.png",
+      "img": "../images/upperBody/jinho.png",
       "advantage": "책임감"
     },
     {
@@ -41,7 +41,7 @@
       "interesting": ["게임", "만화", "운동", "개발자준비"],
       "introduce": " 전원수료 지옥까지 함께해요 ♥",
       "blog": "https://velog.io/@haring6846",
-      "img": "/src/images/upperBody/jiye.png",
+      "img": "../images/upperBody/jiye.png",
       "advantage": "엉덩이가 무겁다"
     },
     {
@@ -52,7 +52,7 @@
       "interesting": ["음악듣기", "영화", "러닝", "개발"],
       "introduce": "전원 수료까지 화이팅 ! !",
       "blog": "https://velog.io/@tony0929",
-      "img": "/src/images/upperBody/gunwo.png",
+      "img": "../images/upperBody/gunwo.png",
       "advantage": "적응이 빠르다"
     }
   ]
