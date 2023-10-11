@@ -101,5 +101,3 @@ const members = [
     },
 ];
 $btnsContainer.append(initButton(members));
-
-//$(document).on('click', handleClickDocument);
