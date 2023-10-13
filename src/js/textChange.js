@@ -17,8 +17,6 @@ function moveForward(speed, delay) {
       await wait(speed);
     }
     await wait(delay);
-
-    moveBack(speed)(element);
   };
 }
 function moveBack(speed) {
@@ -31,13 +29,19 @@ function moveBack(speed) {
 }
 const texts = ['개발자', '꿈나무', '칠칠맞조'];
 let curIndex = 0;
-const delay1000 = moveForward(100, 1000);
-delay1000(secondText)(texts[curIndex++]);
-curIndex %= texts.length;
-setInterval(() => {
-  delay1000(secondText)(texts[curIndex++]);
+async function typing(element, speed = 100, delay = 1000) {
+  if (!element || !element instanceof HTMLElement) return;
+  await moveForward(speed, delay)(element)(texts[curIndex++]);
   curIndex %= texts.length;
-}, 3000);
+  await moveBack(speed)(element);
+  return true;
+}
+async function infinite() {
+  while (true) {
+    await typing(secondText);
+  }
+}
+infinite();
 
 function select(selector) {
   return document.querySelector(selector);
